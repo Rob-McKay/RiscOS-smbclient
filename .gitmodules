@@ -1,0 +1,3 @@
+[submodule "SMBClient-src"]
+	path = SMBClient-src
+	url = https://github.com/apple-oss-distributions/SMBClient.git
