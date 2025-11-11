@@ -26,7 +26,7 @@ function copy_or_diff() {
 
 # Ensure that the required directories exist, and are read and writable from RISC OS
 
-for dir in 'c' 'h' 'o' 'lib' 'lib/h' 'lib/c' 'lib/smb' 'lib/smb/c' 'lib/smb/h' 'lib/smb/o' 'lib/smbclient' 'lib/smbclient/c' 'lib/smbclient/h' 'lib/smbclient/o' 'include/h' 'include/netsmb/h'; do
+for dir in 'c' 'h' 'o' 'lib' 'lib/h' 'lib/c' 'lib/smb' 'lib/smb/c' 'lib/smb/h' 'lib/smb/o' 'lib/smbclient' 'lib/smbclient/c' 'lib/smbclient/h' 'lib/smbclient/o' 'include/h' 'include/netsmb/h' 'kernel/netsmb/c' 'kernel/netsmb/h'; do
     if [ ! -d $dir ]; then
         mkdir -p smbclient/$dir
     fi
@@ -45,6 +45,14 @@ done
 for source in 'fileio' 'netbios' 'netfs' 'ntstatus' 'raw' 'server' 'smbclient_internal' 'smbclient_netfs' 'smbclient_private' 'smbclient' 'util' ; do
     for type in 'c' 'h'; do
         copy_or_diff SMBClient-src/lib/smbclient/$source.$type  smbclient/lib/smbclient/$type/$source
+    done
+done
+
+# kernel/netsmb/*.(c|h) files
+
+for source in 'md4' 'md4c' 'netbios' 'smb_2' 'smb_conn_2' 'smb_conn' 'smb_converter' 'smb_crypt' 'smb_dev_2' 'smb_dev' 'smd_fid' 'smd_gss_2' 'smd_gss' 'smd_iod' 'smd_packets_2' 'smd_read_write' 'smd_rq_2' 'smd_rq' 'smd_sleephandler' 'smd_smb_2' 'smd_smb' 'smd_sbr' 'smd_tran' 'smd_trantcp' 'smd_usr_2' 'smd_usr' 'smd_mc_support' 'smd_mc' ; do
+    for type in 'c' 'h'; do
+        copy_or_diff SMBClient-src/kernel/netsmb/$source.$type  smbclient/kernel/netsmb/$type/$source
     done
 done
 
