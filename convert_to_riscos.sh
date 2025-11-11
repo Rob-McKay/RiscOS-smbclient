@@ -26,7 +26,7 @@ function copy_or_diff() {
 
 # Ensure that the required directories exist, and are read and writable from RISC OS
 
-for dir in 'c' 'h' 'o' 'lib' 'lib/h' 'lib/c' 'lib/smb' 'lib/smb/c' 'lib/smb/h' 'lib/smb/o' 'lib/smbclient' 'lib/smbclient/c' 'lib/smbclient/h' 'lib/smbclient/o' 'include/h' 'include/netsmb/h' 'kernel/netsmb/c' 'kernel/netsmb/h'; do
+for dir in 'c' 'h' 'lib' 'lib/h' 'lib/c' 'lib/smb' 'lib/smb/c' 'lib/smb/h' 'lib/smb/o' 'lib/smbclient' 'lib/smbclient/c' 'lib/smbclient/h' 'lib/smbclient/o' 'include/h' 'include/netsmb/h' 'kernel/netsmb/c' 'kernel/netsmb/h' 'kernel/smbfs/c' 'kernel/smbfs/h'; do
     if [ ! -d $dir ]; then
         mkdir -p smbclient/$dir
     fi
@@ -53,6 +53,14 @@ done
 for source in 'md4' 'md4c' 'netbios' 'smb_2' 'smb_conn_2' 'smb_conn' 'smb_converter' 'smb_crypt' 'smb_dev_2' 'smb_dev' 'smb_fid' 'smb_gss_2' 'smb_gss' 'smb_iod' 'smb_packets_2' 'smb_read_write' 'smb_rq_2' 'smb_rq' 'smb_sleephandler' 'smb_smb_2' 'smb_smb' 'smb_sbr' 'smb_tran' 'smb_trantcp' 'smb_usr_2' 'smb_usr' 'smb_mc_support' 'smb_mc' 'smb'; do
     for type in 'c' 'h'; do
         copy_or_diff SMBClient-src/kernel/netsmb/$source.$type  smbclient/kernel/netsmb/$type/$source
+    done
+done
+
+# kernel/smbfs/*.(c|h) files
+
+for source in 'smbfs_attrlist' 'smbfs_io' 'smbfs_lockf' 'smbfs_node' 'smbfs_notify_change' 'smbfs_security' 'smbfs_smb_2' 'smbfs_smb' 'smbfs_subr_2' 'smbfs_subr' 'smbfs_vfsops' 'smbfs_vnops' 'smbfs'; do
+    for type in 'c' 'h'; do
+        copy_or_diff SMBClient-src/kernel/smbfs/$source.$type  smbclient/kernel/smbfs/$type/$source
     done
 done
 
