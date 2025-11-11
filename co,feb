@@ -1,0 +1,8 @@
+dir <obey$dir>
+echo Current Directory set to <obey$dir>
+
+git reset --hard
+git checkout main
+git pull
+git branch -D to_riscos
+git checkout -b to_riscos origin/to_riscos
