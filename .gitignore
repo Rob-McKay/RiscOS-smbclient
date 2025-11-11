@@ -32,6 +32,11 @@ _ReSharper*/
 #Nuget packages folder
 packages/
 
+
+#MacOS files
+.DS_Store
+
 #RISC OS files
 [Oo]/
 **/!RunImage,*
+smbclient/include/netsmb/.DS_Store
