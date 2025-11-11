@@ -1,0 +1,31 @@
+# Project:   smb
+
+
+# Toolflags:
+CCflags = -c -depend !Depend -IC: -I@.^.^.include -throwback -Wp
+C++flags = -c -depend !Depend -IC: -throwback
+Linkflags = -aif -c++ -o $@
+ObjAsmflags = -throwback -NoCache -depend !Depend
+CMHGflags = 
+LibFileflags = -c -o $@
+Squeezeflags = -o $@
+ModSqzflags = -o $@
+
+
+# Final targets:
+@.o.smb:   @.o.charsets 
+        link $(linkflags) @.o.charsets 
+
+
+# User-editable dependencies:
+
+# Static dependencies:
+@.o.charsets:   @.c.charsets
+        cc $(ccflags) -o @.o.charsets @.c.charsets 
+
+
+# Dynamic dependencies:
+o.charsets:	c.charsets
+o.charsets:	^.^.include.netsmb.h.smb_lib
+o.charsets:	h.preference
+o.charsets:	h.charsets

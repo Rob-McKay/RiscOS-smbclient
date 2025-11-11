@@ -1,0 +1,2 @@
+dir <obey$dir>
+echo Current Directory set to <obey$dir>
