@@ -1,9 +1,15 @@
 /*
+ *   Copyright (c) 2025 4Mation Educational Resources Ltd
+ *   All rights reserved.
+ */
+/*
  *  Dummy implementation of MacOS availability marking macros
  */
 
 
 #define __OSX_AVAILABLE_STARTING(m,i)
+#define API_AVAILABLE(ver)
+#define macos(ver)
 
 #define __MAC_10_7
 #define __IPHONE_NA
