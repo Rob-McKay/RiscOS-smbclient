@@ -50,7 +50,7 @@ done
 
 # kernel/netsmb/*.(c|h) files
 
-for source in 'md4' 'md4c' 'netbios' 'smb_2' 'smb_conn_2' 'smb_conn' 'smb_converter' 'smb_crypt' 'smb_dev_2' 'smb_dev' 'smd_fid' 'smd_gss_2' 'smd_gss' 'smd_iod' 'smd_packets_2' 'smd_read_write' 'smd_rq_2' 'smd_rq' 'smd_sleephandler' 'smd_smb_2' 'smd_smb' 'smd_sbr' 'smd_tran' 'smd_trantcp' 'smd_usr_2' 'smd_usr' 'smd_mc_support' 'smd_mc' ; do
+for source in 'md4' 'md4c' 'netbios' 'smb_2' 'smb_conn_2' 'smb_conn' 'smb_converter' 'smb_crypt' 'smb_dev_2' 'smb_dev' 'smb_fid' 'smb_gss_2' 'smb_gss' 'smb_iod' 'smb_packets_2' 'smb_read_write' 'smb_rq_2' 'smb_rq' 'smb_sleephandler' 'smb_smb_2' 'smb_smb' 'smb_sbr' 'smb_tran' 'smb_trantcp' 'smb_usr_2' 'smb_usr' 'smb_mc_support' 'smb_mc' 'smb'; do
     for type in 'c' 'h'; do
         copy_or_diff SMBClient-src/kernel/netsmb/$source.$type  smbclient/kernel/netsmb/$type/$source
     done
