@@ -2,7 +2,7 @@
 
 
 # Toolflags:
-CCflags = -c -depend !Depend -IC:,TCPIPLibs: -I@.^.^.include -I@.^.^.kernel -I@.^.smbclient -I@.^ -I@.^.^ -throwback -Wp -DNGROUPS=1 -D__attribute(x)= -D_KERNEL
+CCflags = -c -depend !Depend -IC:,TCPIPLibs: -I@.^.^.include -I@.^.^.kernel -I@.^.smbclient -I@.^ -I@.^.^.^ -I@.^.^.^.CoreFoundation -throwback -Wp -DNGROUPS=1 -D__attribute(x)= -D_KERNEL
 C++flags = -c -depend !Depend -IC: -throwback
 Linkflags = -aif -c++ -o $@
 ObjAsmflags = -throwback -NoCache -depend !Depend
