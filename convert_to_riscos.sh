@@ -26,9 +26,18 @@ function copy_or_diff() {
 
 # Ensure that the required directories exist, and are read and writable from RISC OS
 
-for dir in 'c' 'h' 'lib' 'lib/h' 'lib/c' 'lib/smb' 'lib/smb/c' 'lib/smb/h' 'lib/smb/o' 'lib/smbclient' 'lib/smbclient/c' 'lib/smbclient/h' 'lib/smbclient/o' 'include/h' 'include/netsmb/h' 'kernel/netsmb/c' 'kernel/netsmb/h' 'kernel/smbfs/c' 'kernel/smbfs/h'; do
+for dir in 'c' 'h' 'lib' 'lib/h' 'lib/c' 'lib/smb' 'lib/smb/c' 'lib/smb/h' 'lib/smb/o' 'lib/smbclient' 'lib/smbclient/c' 'lib/smbclient/h' 'lib/smbclient/o' 'include/h' 'include/netsmb/h' \
+    'kernel/netsmb/c' 'kernel/netsmb/h' 'kernel/smbfs/c' 'kernel/smbfs/h'; do
     if [ ! -d $dir ]; then
         mkdir -p smbclient/$dir
+    fi
+done
+
+# Ensure that the required directories exist, and are read and writable from RISC OS
+
+for dir in 'CoreFoundation/c' 'CoreFoundation/h'; do
+    if [ ! -d $dir ]; then
+        mkdir -p $dir
     fi
 done
 
@@ -69,3 +78,18 @@ done
 for header in 'nb_lib' 'rq' 'smb_lib' 'smb_rap' 'smbio_2' 'smbio' 'upi_mbuf'; do
     copy_or_diff SMBClient-src/include/netsmb/$header.h smbclient/include/netsmb/h/$header
 done
+
+
+
+for source in CFApplicationPreferences CFArray CFAvailability CFBag CFBase CFBasicHash CFBigNumber CFBinaryHeap CFBinaryPList CFBitVector CFBuiltinConverters CFBundle_Binary CFBundle_BinaryTypes CFBundle_Grok CFBundle_InfoPlist CFBundle_Internal CFBundle_Locale \
+CFBundle_Resources CFBundle_Strings CFBundle CFBundlePriv CFBurstTrie CFByteOrder CFCalendar CFCharacterSet CFCharacterSetPriv CFConcreteStreams CFData CFDate CFDateFormatter CFDictionary CFError_Private CFError CFFileUtilities CFICUConverters \
+CFICULogging CFInternal CFLocale CFLocaleIdentifier CFLocaleInternal CFLocaleKeys CFLogUtilities CFMachPort CFMessagePort CFNumber CFNumberFormatter CFPlatform CFPlatformConverters CFPlugIn_Factory CFPlugIn_Instance CFPlugIn_PlugIn CFPlugIn \
+CFPlugInCOM CFPreferences CFPriv CFPropertyList CFRunLoop CFRuntime CFSet CFSocket CFSocketStream CFSortFunctions CFStorage CFStream CFStreamAbstract CFStreamInternal CFStreamPriv \
+CFString CFStringDefaultEncoding CFStringEncodingConverter CFStringEncodingConverterExt CFStringEncodingConverterPriv CFStringEncodingDatabase CFStringEncodingExt CFStringEncodings CFStringScanner CFStringUtilities \
+CFSystemDirectories CFTimeZone CFTree CFUniChar CFUniCharPriv CFUnicodeDecomposition CFUnicodePrecomposition CFURL CFURL.inc CFURLAccess CFURLPriv CFUserNotification CFUtilities CFUUID CFVersion CFWindowsUtilities \
+CFXMLInputStream CFXMLNode CFXMLParser CFXMLPreferencesDomain CFXMLTree CoreFoundation_Prefix CoreFoundation ForFoundationOnly plconvert TargetConditionals ; do
+    for type in 'c' 'h'; do
+        copy_or_diff CF-src/$source.$type  CoreFoundation/$type/$source
+    done
+done
+
