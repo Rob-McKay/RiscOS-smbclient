@@ -13,6 +13,6 @@
 #define TARGET_OS_IPHONE            0 
 #define TARGET_IPHONE_SIMULATOR     0 
 #define TARGET_OS_LINUX             0
-#define TARGET_RISCOS				1
+#define TARGET_OS_RISCOS			1
 
 #endif  /* __TARGETCONDITIONALS__ */

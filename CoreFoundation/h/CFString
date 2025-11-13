@@ -810,7 +810,8 @@ typedef struct {
 CF_INLINE void CFStringInitInlineBuffer(CFStringRef str, CFStringInlineBuffer *buf, CFRange range) {
     buf->theString = str;
     buf->rangeToBuffer = range;
-    buf->directCStringBuffer = (buf->directUniCharBuffer = CFStringGetCharactersPtr(str)) ? NULL : CFStringGetCStringPtr(str, kCFStringEncodingASCII);
+    buf->directUniCharBuffer = CFStringGetCharactersPtr(str);
+    buf->directCStringBuffer = (buf->directUniCharBuffer) ? NULL : CFStringGetCStringPtr(str, kCFStringEncodingASCII);
     buf->bufferedRangeStart = buf->bufferedRangeEnd = 0;
 }
 
@@ -859,8 +860,8 @@ CF_INLINE Boolean CFStringGetSurrogatePairForLongCharacter(UTF32Char character, 
     if ((character > 0xFFFFUL) && (character < 0x110000UL)) { // Non-BMP character
         character -= 0x10000;
         if (NULL != surrogates) {
-            surrogates[0] = (UniChar)((character >> 10) + 0xD800UL);
-            surrogates[1] = (UniChar)((character & 0x3FF) + 0xDC00UL);
+            surrogates[0] = (UniChar)((character >> 10U) + 0xD800UL);
+            surrogates[1] = (UniChar)((character & 0x3FFU) + 0xDC00UL);
         }
         return true;
     } else {

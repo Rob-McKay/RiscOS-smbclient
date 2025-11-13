@@ -40,7 +40,9 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <CoreFoundation/CoreFoundation.h>
+#ifndef __riscos
 #include <pthread.h>
+#endif
 #include <sys/mount.h>
 
 #include <netsmb/smb.h>

@@ -38,6 +38,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #endif
+
+#ifndef __riscos
 #include <sys/kauth.h>
 
 #ifdef _KERNEL
@@ -48,6 +50,7 @@
 #endif
 
 #include <libkern/OSTypes.h>
+#endif
 #include <smbclient/smbclient.h>
 
 /*
@@ -273,7 +276,7 @@ enum smb_fs_types {
 
 #if defined(_KERNEL) || defined(MC_TESTER)
 
-#include <sys/lock.h>
+//#include <sys/lock.h>
 #include <netsmb/smb_subr.h>
 #include <netsmb/smb_fid.h>
 #include <netsmb/smb2_mc.h>

@@ -167,9 +167,9 @@
 #define CF_AVAILABLE(_mac, _ios)
 #define CF_AVAILABLE_MAC(_mac)
 #define CF_AVAILABLE_IOS(_ios)
-#define CF_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep, ...)
-#define CF_DEPRECATED_MAC(_macIntro, _macDep, ...)
-#define CF_DEPRECATED_IOS(_iosIntro, _iosDep, ...)
+#define CF_DEPRECATED(_macIntro, _macDep, _iosIntro, ...)
+#define CF_DEPRECATED_MAC(_macIntro, ...)
+#define CF_DEPRECATED_IOS(_iosIntro, ...)
 #endif
 
 // Older versions of these macros; use iOS versions instead
@@ -188,22 +188,27 @@
 #define CF_ENUM_AVAILABLE(_mac, _ios)
 #define CF_ENUM_AVAILABLE_MAC(_mac)
 #define CF_ENUM_AVAILABLE_IOS(_ios)
-#define CF_ENUM_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep, ...)
-#define CF_ENUM_DEPRECATED_MAC(_macIntro, _macDep, ...)
-#define CF_ENUM_DEPRECATED_IOS(_iosIntro, _iosDep, ...)
+#define CF_ENUM_DEPRECATED(_macIntro, ...)
+#define CF_ENUM_DEPRECATED_MAC(_macIntro, ...)
+#define CF_ENUM_DEPRECATED_IOS(_iosIntro, ...)
 #endif
 
 // Enums and Options
-#if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
-#define CF_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
-#if (__cplusplus)
-#define CF_OPTIONS(_type, _name) _type _name; enum : _type
+#if defined(__cplusplus)
+   	#if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
+      	#define CF_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
+      	#if defined(__cplusplus)
+         	#define CF_OPTIONS(_type, _name) _type _name; enum : _type
+      	#else
+			#define CF_OPTIONS(_type, _name) enum _name : _type _name; enum _name : _type
+		#endif
+	#else
+		#define CF_ENUM(_type, _name) _type _name; enum
+		#define CF_OPTIONS(_type, _name) _type _name; enum
+	#endif
 #else
-#define CF_OPTIONS(_type, _name) enum _name : _type _name; enum _name : _type
-#endif
-#else
-#define CF_ENUM(_type, _name) _type _name; enum
-#define CF_OPTIONS(_type, _name) _type _name; enum
+	#define CF_ENUM(_type, _name) _type _name; enum
+	#define CF_OPTIONS(_type, _name) _type _name; enum
 #endif
 
 // Extension availability macros
