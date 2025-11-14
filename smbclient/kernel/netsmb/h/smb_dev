@@ -104,10 +104,17 @@
 	TYPE		ioc_ ## NAME __attribute((aligned(8))); \
     }
 
+#if defined __riscos
+#define SMB_IOC_CHECK_SIZE(STRUCT)\
+    _Static_assert(sizeof(STRUCT) <= 0x2000U, #STRUCT " is too large")
+
+#define SMBIOC_UPDATE_NOTIFITER_PID_ENTITLEMENT
+#else
 #define SMB_IOC_CHECK_SIZE(STRUCT)\
     _Static_assert(sizeof(STRUCT) <= IOCPARM_MAX, #STRUCT " is too large")
 
 #define SMBIOC_UPDATE_NOTIFITER_PID_ENTITLEMENT "com.apple.private.smbfs.update-notifier-pid"
+#endif
 
 struct smbioc_ossn {
 	uint32_t	ioc_reconnect_wait_time;

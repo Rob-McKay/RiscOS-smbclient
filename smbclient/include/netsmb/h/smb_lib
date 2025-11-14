@@ -42,6 +42,8 @@
 #include <CoreFoundation/CoreFoundation.h>
 #ifndef __riscos
 #include <pthread.h>
+#else
+typedef void *pthread_mutex_t;
 #endif
 #include <sys/mount.h>
 

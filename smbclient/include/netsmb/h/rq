@@ -37,6 +37,7 @@
 
 #include <sys/types.h>
 
+
 struct smb_usr_rq;
 
 int smb_ntwrkpath_to_localpath(struct smb_ctx *, 

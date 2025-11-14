@@ -30,6 +30,12 @@
 #include <netsmb/smb_converter.h>
 #include <sys/smb_byte_order.h>
 
+
+//#include <errno.h>
+#include <sys/errno.h>
+
+
+
 /*
  * Generic routine that handles open/creates.
  */
@@ -106,7 +112,7 @@ smbio_ntcreatex(void *smbctx, const char *path, const char *streamName,
 	}
 	if (error) {
 		os_log_debug(OS_LOG_DEFAULT, "%s: smb_usr_rq_put_dstring failed syserr = %s",
-					 __FUNCTION__, strerror(error));
+					 __func__, strerror(error));
 		goto done;
 	}
 	/* Now the network name length into the reserved location */
@@ -115,7 +121,7 @@ smbio_ntcreatex(void *smbctx, const char *path, const char *streamName,
     error = smb_usr_rq_simple(rqp);
 	if (error != 0) {
 		os_log_debug(OS_LOG_DEFAULT, "%s: smb_usr_rq_simple failed, syserr = %s",
-					 __FUNCTION__, strerror(error));
+					 __func__, strerror(error));
 		goto done;
 	}
 	
@@ -137,7 +143,7 @@ smbio_ntcreatex(void *smbctx, const char *path, const char *streamName,
 		((wc != NTCREATEX_NORMAL_WDCNT) && (wc != NTCREATEX_EXTENDED_WDCNT))) {
 		error = EIO;
 		os_log_debug(OS_LOG_DEFAULT, "%s: bad word count, syserr = %s",
-					 __FUNCTION__, strerror(error));
+					 __func__, strerror(error));
 		goto done;
  	}
 	md_get_uint8(mdp, NULL);        /* secondary cmd */
@@ -297,7 +303,7 @@ int smbio_open_pipe(void *smbctx, const char *pipe_path, int *fid)
 	}
 	
 	if (error) {
-		os_log_debug(OS_LOG_DEFAULT, "%s, syserr = %s", __FUNCTION__, strerror(error));
+		os_log_debug(OS_LOG_DEFAULT, "%s, syserr = %s", __func__, strerror(error));
     }
     else {
         *fid = (int) smb2_fid;  /* cast to SMB 1 fid */
@@ -358,7 +364,7 @@ int smbio_check_directory(struct smb_ctx *ctx, const void *path,
 		error = smb_usr_rq_simple(rqp);
 	}
 	if (error && (error != ENOENT) && (error != ENOTDIR)) {
-		os_log_debug(OS_LOG_DEFAULT, "%s failed, syserr = %s", __FUNCTION__, strerror(error));
+		os_log_debug(OS_LOG_DEFAULT, "%s failed, syserr = %s", __func__, strerror(error));
 	}
 	if (nt_error) {
 		*nt_error = smb_usr_rq_nt_error(rqp);
