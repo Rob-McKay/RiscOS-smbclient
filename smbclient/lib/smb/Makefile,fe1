@@ -1,0 +1,56 @@
+# Project:   smblib
+
+
+# Toolflags:
+CCflags = -c -depend !Depend -JTCPIPLibs:,C: -I@.^.^.include -I@.^.^.kernel -I@.^.smbclient -I@.^ -I@.^.^.^ -I@.^.^.^.CoreFoundation -throwback -Wpz -DNGROUPS=1 -D__attribute(x)= 
+C++flags = -c -depend !Depend -IC: -throwback
+Linkflags = -aif -c++ -o $@
+ObjAsmflags = -throwback -NoCache -depend !Depend
+CMHGflags = 
+LibFileflags = -c -o $@
+Squeezeflags = -o $@
+ModSqzflags = -o $@
+
+
+# Final targets:
+@.o.smblib:   @.o.smbio 
+        LibFile $(LibFileflags) @.o.smbio 
+
+
+# User-editable dependencies:
+
+# Static dependencies:
+@.o.smbio:   @.c.smbio
+        cc $(ccflags) -o @.o.smbio @.c.smbio 
+
+
+# Dynamic dependencies:
+o.smbio:	c.smbio
+o.smbio:	^.^.include.netsmb.h.smbio
+o.smbio:	TCPIPLibs:sys.h.types
+o.smbio:	TCPIPLibs:sys.h.cdefs
+o.smbio:	TCPIPLibs:machine.h.endian
+o.smbio:	TCPIPLibs:machine.h.ansi
+o.smbio:	TCPIPLibs:machine.h.types
+o.smbio:	^.^.include.netsmb.h.smb_lib
+o.smbio:	TCPIPLibs:sys.h.types
+o.smbio:	TCPIPLibs:sys.h.socket
+o.smbio:	TCPIPLibs:sys.h.cdefs
+o.smbio:	TCPIPLibs:netinet.h.in
+o.smbio:	TCPIPLibs:arpa.h.inet
+o.smbio:	TCPIPLibs:sys.h.cdefs
+o.smbio:	TCPIPLibs:sys.h.mount
+o.smbio:	TCPIPLibs:sys.h.ucred
+o.smbio:	TCPIPLibs:sys.h.queue
+o.smbio:	TCPIPLibs:sys.h.cdefs
+o.smbio:	^.^.kernel.netsmb.h.smb
+o.smbio:	^.^.kernel.netsmb.h.smb_dev
+o.smbio:	TCPIPLibs:sys.h.types
+o.smbio:	TCPIPLibs:sys.h.ioccom
+o.smbio:	TCPIPLibs:sys.h.unistd
+o.smbio:	TCPIPLibs:sys.h._posix
+o.smbio:	^.^.kernel.netsmb.h.smb
+o.smbio:	^.^.kernel.netsmb.h.smb_conn
+o.smbio:	^.^.kernel.netsmb.h.netbios
+o.smbio:	h.preference
+o.smbio:	^.^.kernel.netsmb.h.smb_conn

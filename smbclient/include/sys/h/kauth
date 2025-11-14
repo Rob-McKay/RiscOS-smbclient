@@ -1,0 +1,38 @@
+/*
+ *   Copyright (c) 2025 4Mation Educational Resources Ltd
+ *   All rights reserved.
+ */
+#ifndef __sys_types_h
+#define __sys_types_h
+
+#include <stdint.h>
+
+typedef unsigned char   __darwin_uuid_t[16];
+
+
+
+
+typedef uintptr_t user_addr_t;
+typedef __darwin_uuid_t uuid_t;
+
+
+/*
+ * Identities.
+ */
+
+#define KAUTH_UID_NONE  (~(uid_t)0 - 100)       /* not a valid UID */
+#define KAUTH_GID_NONE  (~(gid_t)0 - 100)       /* not a valid GID */
+
+/* NT Security Identifier, structure as defined by Microsoft */
+#pragma pack(1)    /* push packing of 1 byte */
+typedef struct {
+	uint8_t                sid_kind;
+	uint8_t                sid_authcount;
+	uint8_t                sid_authority[6];
+#define KAUTH_NTSID_MAX_AUTHORITIES 16
+	uint32_t       sid_authorities[KAUTH_NTSID_MAX_AUTHORITIES];
+} ntsid_t;
+#pragma pack()    /* pop packing to previous packing level */
+
+#endif
+
